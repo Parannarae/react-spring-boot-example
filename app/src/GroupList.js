@@ -7,16 +7,16 @@ class GroupList extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {groups: [], isLoading: true};
+        this.state = { groups: [], isLoading: true };
         this.remove = this.remove.bind(this);
     }
 
     componentDidMount() {
-        this.setState({isLoading: true});
+        this.setState({ isLoading: true });
 
         fetch('api/groups')
             .then(response => response.json())
-            .then(data => this.setState({groups: data, isLoading: false}));
+            .then(data => this.setState({ groups: data, isLoading: false }));
     }
 
     async remove(id) {
@@ -28,12 +28,12 @@ class GroupList extends Component {
             }
         }).then(() => {
             let updatedGroups = [...this.state.groups].filter(i => i.id !== id);
-            this.setState({groups: updatedGroups});
+            this.setState({ groups: updatedGroups });
         });
     }
 
     render() {
-        const {groups, isLoading} = this.state;
+        const { groups, isLoading } = this.state;
 
         if (isLoading) {
             return <p>Loading...</p>;
@@ -42,7 +42,7 @@ class GroupList extends Component {
         const groupList = groups.map(group => {
             const address = `${group.address || ''} ${group.city || ''} ${group.stateOrProvince || ''}`;
             return <tr key={group.id}>
-                <td style={{whiteSpace: 'nowrap'}}>{group.name}</td>
+                <td style={{ whiteSpace: 'nowrap' }}>{group.name}</td>
                 <td>{address}</td>
                 <td>{group.events.map(event => {
                     return <div key={event.id}>{new Intl.DateTimeFormat('en-US', {
