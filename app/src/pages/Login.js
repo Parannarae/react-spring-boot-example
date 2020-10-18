@@ -56,7 +56,9 @@ class Login extends Component {
         if (isLoggedIn) {
             return <Redirect to='/' />
         }
+
         // TODO: use reactstrap
+        // TODO: redirect to previous page when signed in
         return (
             <Card>
                 <Logo src={logoImg} />
