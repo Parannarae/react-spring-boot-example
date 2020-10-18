@@ -30,7 +30,7 @@ class Login extends Component {
     async logIn() {
         const { userName, password } = this.state;
         // TODO: login api
-        await fetch('/api/auth/login', {
+        await fetch('/api/auth/logIn', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
