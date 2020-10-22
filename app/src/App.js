@@ -39,7 +39,7 @@ class App extends Component {
           <Switch>
             <Route path='/login' component={Login} />
             <Route path='/signup' component={Signup} />
-            <PrivateRoute path='/' exact={true} component={Home} />
+            <Route path='/' exact={true} component={Home} />
             <PrivateRoute path='/groups' exact={true} component={GroupList} />
             <PrivateRoute path='/groups/:id' component={GroupEdit} />
           </Switch>

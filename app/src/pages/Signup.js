@@ -36,17 +36,21 @@ class Signup extends Component {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    userName: userName,
+                    email: userName,
                     password: password
                 })
-            }).then(result => {
-                if (result.status === 200) {
-                    this.context.setAuthTokens(result.data);
-                    this.setState({ isLoggedIn: true });
+            }).then(response => {
+                if (response.status === 200) {
+                    return response.json();
                 } else {
-                    this.setState({ isError: true });
+                    throw response.status;
                 }
-            }).catch(e => {
+            }).then(
+                data => {
+                    this.context.setAuthTokens(data.token);
+                    this.setState({ isLoggedIn: true });
+                }
+            ).catch(e => {
                 this.setState({ isError: true });
             });
         } else {

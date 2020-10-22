@@ -10,14 +10,18 @@ export default class AppNavbar extends Component {
         super(props);
         this.state = { isOpen: false };
         this.toggle = this.toggle.bind(this);
-        this.logOut = this.logOut.bind(this);
+        this.logInOutButton = this.logInOutButton.bind(this);
     }
-
-    logOut() {
-        // remove authentication token
-        this.context.setAuthTokens();
+    
+    logInOutButton() {
+        const { authTokens } = this.context;
+        if (authTokens) {
+            return <Button onClick={() => this.context.setAuthTokens()}>Log out</Button>
+        } else {
+            return <Button tag={Link} to="/login">Log In</Button>
+        }
     }
-
+            
     toggle() {
         this.setState({
             isOpen: !this.state.isOpen
@@ -31,7 +35,7 @@ export default class AppNavbar extends Component {
             <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
                     <NavItem>
-                        <Button onClick={this.logOut}>Log out</Button>
+                        {this.logInOutButton()}
                     </NavItem>
                     <NavItem>
                         <NavLink href="https://github.com/Parannarae">GitHub</NavLink>
