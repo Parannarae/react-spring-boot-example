@@ -16,7 +16,7 @@ export default class AppNavbar extends Component {
     logInOutButton() {
         const { authTokens } = this.context;
         if (authTokens) {
-            return <Button onClick={() => this.context.setAuthTokens()}>Log out</Button>
+            return <Button onClick={() => this.context.unSetAuthTokens()}>Log out</Button>
         } else {
             return <Button tag={Link} to="/login">Log In</Button>
         }

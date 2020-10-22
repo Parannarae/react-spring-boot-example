@@ -18,12 +18,18 @@ class App extends Component {
       authTokens: existingTokens
     };
     this.setAuthTokens = this.setAuthTokens.bind(this);
+    this.unSetAuthTokens = this.unSetAuthTokens.bind(this);
   }
 
   setAuthTokens(data) {
-    console.log("Storing tokens: " + data)
+    console.log("Storing tokens: " + data);
     localStorage.setItem("tokens", JSON.stringify(data));
-    this.setState({ authTokens: data })
+    this.setState({ authTokens: data });
+  }
+  
+  unSetAuthTokens() {
+    localStorage.removeItem("tokens");
+    this.setState({ authTokens: null });
   }
 
   render() {
@@ -34,7 +40,7 @@ class App extends Component {
     // by passing a variable which is the result of the destructuring, it passes both key and value to new object
     // (`value` in below case)
     return (
-      <AuthContext.Provider value={{ authTokens, setAuthTokens: this.setAuthTokens }}>
+      <AuthContext.Provider value={{ authTokens, setAuthTokens: this.setAuthTokens, unSetAuthTokens: this.unSetAuthTokens }}>
         <Router>
           <Switch>
             <Route path='/login' component={Login} />
