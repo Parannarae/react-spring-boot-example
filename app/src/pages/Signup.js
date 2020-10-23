@@ -62,7 +62,7 @@ class Signup extends Component {
     render() {
         const { isLoggedIn, isError, userName, password, confirmedPassword } = this.state;
         if (isLoggedIn) {
-            return <Redirect to='/' />
+            return <Redirect to='/groups' />
         }
 
         // TODO: use reactstrap

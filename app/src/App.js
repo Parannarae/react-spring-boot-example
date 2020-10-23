@@ -20,7 +20,7 @@ class App extends Component {
     this.setAuthTokens = this.setAuthTokens.bind(this);
     this.unSetAuthTokens = this.unSetAuthTokens.bind(this);
   }
-
+  
   setAuthTokens(data) {
     console.log("Storing tokens: " + data);
     localStorage.setItem("tokens", JSON.stringify(data));
@@ -46,7 +46,7 @@ class App extends Component {
             <Route path='/login' component={Login} />
             <Route path='/signup' component={Signup} />
             <Route path='/' exact={true} component={Home} />
-            <PrivateRoute path='/groups' exact={true} component={GroupList} />
+            <Route path='/groups' exact={true} component={GroupList} />
             <PrivateRoute path='/groups/:id' component={GroupEdit} />
           </Switch>
         </Router>

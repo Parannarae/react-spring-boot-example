@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 import AppNavbar from '../AppNavbar';
 import { Link } from 'react-router-dom';
+import PixelComponent, { pixelEvent } from '../FBPixel';
 
-class GroupList extends Component {
+class GroupList extends PixelComponent {
 
     constructor(props) {
         super(props);
@@ -12,6 +13,8 @@ class GroupList extends Component {
     }
 
     componentDidMount() {
+        this.initPixel();
+        pixelEvent.pageViewJUGList();
         this.setState({ isLoading: true });
 
         fetch('api/groups')

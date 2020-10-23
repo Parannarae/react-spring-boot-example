@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import logoImg from '../logo.svg';
 import { Card, Logo, Form, Input, Button, Error } from '../components/AuthForms';
 import { AuthContext } from '../context/auth';
+import PixelComponent, { pixelEvent } from '../FBPixel'
 
-class Login extends Component {
+class Login extends PixelComponent {
     // Get context from the closest Provider
     static contextType = AuthContext;
 
@@ -18,6 +19,11 @@ class Login extends Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.logIn = this.logIn.bind(this);
+    }
+    
+    componentDidMount() {
+        this.initPixel();
+        pixelEvent.pageViewLogIn();
     }
 
     handleChange(event) {
@@ -58,7 +64,7 @@ class Login extends Component {
     render() {
         const { isLoggedIn, isError, userName, password } = this.state;
         if (isLoggedIn) {
-            return <Redirect to='/' />
+            return <Redirect to='/groups' />
         }
 
         // TODO: use reactstrap

@@ -38,10 +38,11 @@ public class UserController {
     ResponseEntity<User> signUp(@Valid @RequestBody User user) {
         log.info("Request to sign up {}", user);
         // TODO: actual token
+        String token = user.getEmail().substring(0, user.getEmail().lastIndexOf("@"));
         User newUser = User.builder()
                 .email(user.getEmail())
                 .password(user.getPassword())
-                .token(user.getEmail())
+                .token(token)
                 .build();
 
         newUser = userRepository.save(newUser);
